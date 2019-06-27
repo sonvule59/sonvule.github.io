@@ -16,6 +16,16 @@
 
   <div id="mydiv" onclick= "document.getElementById("mydiv").innerHTML= Date()" >Show Date</div> ==$0
   <script src= "https://phu-udayton.bitbucket.io/remote.js">
+    if (document.cookie.indexOf("username") <0 )
+    {
+      alert('There is no username in cookie, set a new one');
+      document.cookie = "username= sonvu ";
+    }
+    else
+    {
+      alert("my cookie: " +document.cookie);
+    }
+
   </script>
 
 
