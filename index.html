@@ -1,44 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title> Son Vu</title>
+  <meta charset="UTF-8">
+  <title>Son Vu Le | Researcher & Computer Scientist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; color: #222;}
+    .container { max-width: 900px; margin: 30px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); padding: 32px; }
+    h1, h2 { color: #244a68; }
+    h1 { margin-top: 0; }
+    a { color: #1a73e8; text-decoration: none;}
+    a:hover { text-decoration: underline;}
+    .bio { margin-bottom: 32px; }
+    .section { margin-bottom: 38px; }
+    .projects, .research { list-style: none; padding: 0; }
+    .project, .paper { margin-bottom: 20px; }
+    .project-title { font-weight: bold; }
+    .tags { font-size: 13px; color: #5f6368;}
+    @media (max-width: 700px) {
+      .container { padding: 12px; }
+    }
+    .contact { background: #f1f3f4; padding: 16px; border-radius: 8px; }
+    .loader { font-size: 16px; color: #666; }
+  </style>
 </head>
-
-
 <body>
-  <img src="programmer-wallpaper_107153.png" height="150" width="40%" />
+  <div class="container">
+    <h1>Son Vu Le</h1>
+    <div class="bio">
+      <p>
+        <strong>Researcher & Computer Scientist</strong><br>
+        Affiliation: <a href="#">Your University/Organization</a><br>
+        <span class="tags">Quantum Computing, Optimization, AI, Programming Languages, Category Theory</span>
+      </p>
+      <p>
+        I am a researcher specializing in <b>computer science</b> and <b>applied mathematics</b>. My interests include quantum computing, large language models, and the intersection of theoretical CS and real-world applications.
+      </p>
+      <p>
+        <a href="mailto:your.email@example.com">Email</a> |
+        <a href="https://github.com/sonvule59">GitHub</a> |
+        <a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a>
+      </p>
+    </div>
 
-  <h1 style="color: blue"> Son Vu</h1>
+    <div class="section">
+      <h2>GitHub Projects</h2>
+      <div id="repo-list">
+        <span class="loader">Loading repositories...</span>
+      </div>
+    </div>
 
-  <script type="text/javascript">document.write("Hello There")
-  </script>
+    <div class="section">
+      <h2>Research Publications</h2>
+      <ul class="research">
+        <!-- Example publications below. Replace with your own -->
+        <li class="paper">
+          <b>Quantum Machine Learning for Large-Scale Optimization</b> <br>
+          <span class="tags">QIP 2024</span><br>
+          <a href="https://arxiv.org/abs/xxxx.xxxxx">arXiv</a> |
+          <a href="https://doi.org/10.xxxx/xxxx">DOI</a>
+        </li>
+        <li class="paper">
+          <b>Sample Paper Title</b> <br>
+          <span class="tags">Journal Name, 2023</span><br>
+          <a href="https://arxiv.org/abs/yyyy.yyyyy">arXiv</a>
+        </li>
+        <!-- Add more as needed -->
+      </ul>
+      <p>
+        See my full list of publications on <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank">Google Scholar</a>.
+      </p>
+    </div>
 
-  <div id="mydiv" onclick= "document.getElementById("mydiv").innerHTML= Date()" >Show Date</div> ==$0
+    <div class="section contact">
+      <h2>Contact</h2>
+      <p>
+        For research or collaboration inquiries, email me at <a href="mailto:your.email@example.com">your.email@example.com</a>.
+      </p>
+    </div>
+  </div>
+
   <script>
-    if (document.cookie.indexOf("username") <0 )
-    {
-      alert('There is no username in cookie, set a new one');
-      document.cookie = "username= sonvu ";
-    }
-    else
-    {
-      alert("my cookie: " +document.cookie);
-    }
+    // Auto-list your GitHub repositories!
+    const githubUsername = "sonvule59";
+    const repoList = document.getElementById('repo-list');
+    fetch(`https://api.github.com/users/${githubUsername}/repos?per_page=100&sort=updated`)
+      .then(response => response.json())
+      .then(repos => {
+        if (!Array.isArray(repos) || repos.length === 0) {
+          repoList.innerHTML = "<span class='tags'>No public repositories found.</span>";
+          return;
+        }
+        const filtered = repos.filter(r => !r.fork);
+        const html = "<ul class='projects'>" + filtered.map(repo => `
+          <li class="project">
+            <span class="project-title"><a href="${repo.html_url}" target="_blank">${repo.name}</a></span>
+            <span class="tags">${repo.language ? repo.language : "Other"}</span><br>
+            <span>${repo.description ? repo.description : ""}</span>
+          </li>
+        `).join('') + "</ul>";
+        repoList.innerHTML = html;
+      })
+      .catch(err => {
+        repoList.innerHTML = "<span class='tags'>Could not load repositories.</span>";
+      });
   </script>
-
-  <h2 id="myH"></h2>
-  <p id="myP"></p>
-
-  <script>
-
-  document.getElementById("myH").innerHTML = "My code";
-
-  document.getElementById("myP").innerHTML = "My first paragraph.";
-  </script>
-
-  <!--<script type="text/JavaScript" src="functions.js"></script> -->
-
-
 </body>
 </html>
